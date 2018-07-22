@@ -28,4 +28,5 @@ run:
   script:
   - curl ipinfo.io/ip
   - curl -v https://zalenium.aoach.tools/wd/hub
+  - curl -v zalenium/wd/hub
   - python hello_world.py
