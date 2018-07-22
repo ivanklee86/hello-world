@@ -26,5 +26,6 @@ before_script:
 
 run:
   script:
+  - curl ipinfo.io/ip
   - curl -v https://zalenium.aoach.tools/wd/hub
   - python hello_world.py
