@@ -1,4 +1,3 @@
-
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -42,7 +41,7 @@ htmlcov/
 .tox/
 .coverage
 .coverage.*
-aqe-skyfit/.cache
+.cache
 nosetests.xml
 coverage.xml
 *,cover
@@ -97,8 +96,6 @@ ENV/
 .ropeproject
 
 #Custom
-.cache
 .idea
 assets
 results*
-screenshot_archive
