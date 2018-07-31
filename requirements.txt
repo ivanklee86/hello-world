@@ -1,6 +1,16 @@
+#App
 Flask
 Flask-SQLAlchemy
 gunicorn
 logmatic-python
 psycopg2
 SQLAlchemy
+
+#Development
+pytest
+pytest-cov
+pytest-html
+pytest-runner
+pytest-rerunfailures
+pytest-xdist
+pylint
