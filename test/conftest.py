@@ -4,7 +4,8 @@ import tempfile
 import pytest
 import sqlite3
 
-from hello_flask import app
+
+from flask_app import app
 
 def create_db(file_name):
     conn = sqlite3.connect(file_name)
@@ -12,7 +13,7 @@ def create_db(file_name):
     conn.close()
 
 @pytest.fixture
-def client():
+def client(request):
     temp_path = tempfile.mkdtemp()
     temp_file = temp_path + "/test.db"
     create_db(temp_file)
@@ -20,6 +21,15 @@ def client():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///%s" % temp_file
     app.config['TESTING'] = True
     client = app.test_client()
+
+    # Establish an application context before running the tests.
+    ctx = app.app_context()
+    ctx.push()
+
+    def teardown():
+        ctx.pop()
+
+    request.addfinalizer(teardown)
 
     yield client
 

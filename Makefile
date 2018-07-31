@@ -6,7 +6,7 @@ DB_NAME := test.db
 run:
 	export PYTHONPATH='.'; \
 	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
-	export FLASK_APP=hello_flask.py && flask run; \
+	export FLASK_APP=flask_app && flask run; \
 
 database: delete-db create-db
 

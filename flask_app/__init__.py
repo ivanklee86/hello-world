@@ -7,7 +7,8 @@ import sys
 
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
-from requestid import requestid, RequestIdFilter
+from flask_app.config import *
+from flask_app.utilities.requestid import requestid, RequestIdFilter
 
 
 log_level = logging._nameToLevel[os.environ.get('APP_LOG_LEVEL', 'INFO')]
@@ -109,7 +110,7 @@ def remove_entry(id):
         app.logger.info('Entry not found for id %s' % id)
         return make_response(jsonify(''), 404)
 
-
+@requestid
 @app.route('/api/v1/status', methods=['GET'])
 def status():
     return make_response(jsonify('OK'), 200)
