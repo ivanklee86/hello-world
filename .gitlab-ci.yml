@@ -17,11 +17,12 @@ before_script:
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
+  - pip install -f requirements.txt
 
 test:
   stage: test
   script:
-      - py.test -n 4 --cov=aoachpages
+      - py.test -n 4 --cov=hello_flask
       - pylint hello_flask -f parseable>> pylint.log || true
   artifacts:
     paths:
