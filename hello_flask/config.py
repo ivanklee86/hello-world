@@ -39,4 +39,4 @@ class DevelopmentConfig(BaseConfig):
     LOG_LEVEL = "DEBUG"
     LOG_FORMATTER = "TEXT"
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+    SQLALCHEMY_DATABASE_URI = os.getenv('APP_DATABASE_URI')
