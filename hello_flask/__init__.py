@@ -9,11 +9,13 @@ def create_app():
     from hello_flask import modules
     from hello_flask.config_flask import config_flask
     from hello_flask.helpers.requestid import requestid
-    from hello_flask.extensions import db
+    from hello_flask.extensions.sqlalchemy.create_db import create_db
 
     config_flask(app)
     extensions.init_app(app)
     modules.init_app(app)
+
+    create_db(app)
 
     @requestid
     @app.errorhandler(500)

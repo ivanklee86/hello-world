@@ -15,7 +15,7 @@ def init_app(app):
     if log_type.upper() == 'JSON':
         handler.setFormatter(logmatic.JsonFormatter())
     else:
-        text_formatter = logging.Formatter('%(asctime)s - %(request_id)s - %(name)s - %(levelname)s - %(message)s')
+        text_formatter = logging.Formatter('%(asctime)s - %(request_id)s - %(name)s - %(filename)s - %(levelname)s - %(message)s')
         handler.setFormatter(text_formatter)
 
     handler.addFilter(RequestIdFilter())
