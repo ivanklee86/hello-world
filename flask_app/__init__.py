@@ -11,12 +11,13 @@ from flask_app.config import *
 from flask_app.utilities.requestid import requestid, RequestIdFilter
 
 
+
 log_level = logging._nameToLevel[os.environ.get('APP_LOG_LEVEL', 'INFO')]
 # Configure JSON filesystem log handler
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(logmatic.JsonFormatter())
 handler.addFilter(RequestIdFilter())
-# Configure global logger
+# Configure global logging
 logger = logging.getLogger()
 logger.addHandler(handler)
 logger.setLevel(log_level)
@@ -41,7 +42,7 @@ class Entry(db.Model):
 
 @app.before_first_request
 def setup():
-    # Configure application logger
+    # Configure application logging
     app.logger.addHandler(handler)
     app.logger.setLevel(log_level)
     # Bootstrapping database schema
