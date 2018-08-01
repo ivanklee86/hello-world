@@ -9,8 +9,8 @@ cache:
     - .cache/pip
     - venv/
 
-  stages:
-    - test
+stages:
+  - test
 
 before_script:
   - python -V
