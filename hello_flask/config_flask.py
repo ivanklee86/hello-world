@@ -7,14 +7,6 @@ CONFIG_NAME_MAPPER = {
     'staging': 'config.StagingConfig'
 }
 
-def get_config():
-    env_flask_config_name = os.getenv('FLASK_CONFIG')
-    if not env_flask_config_name:
-        env_flask_config_name = 'development'
-
-    return CONFIG_NAME_MAPPER[env_flask_config_name]
-
-
 def config_flask(app):
     env_flask_config_name = os.getenv('FLASK_CONFIG')
     if not env_flask_config_name:

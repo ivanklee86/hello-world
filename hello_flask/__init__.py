@@ -2,7 +2,7 @@ import os
 from flask import Flask, make_response, jsonify
 
 
-def create_app():
+def create_app(overwrite_db=None):
     app = Flask(__name__)
 
     from hello_flask import extensions
@@ -12,6 +12,9 @@ def create_app():
     from hello_flask.extensions.sqlalchemy.create_db import create_db
 
     config_flask(app)
+    if overwrite_db:
+        app.config['SQLALCHEMY_DATABASE_URI'] = overwrite_db
+
     extensions.init_app(app)
     modules.init_app(app)
 

@@ -1,5 +1,7 @@
 # Flask demo app
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
+
 This is a small demo app created in Flask created to exercise automated deployments
 of non-trivial applications.
 
