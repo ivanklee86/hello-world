@@ -12,7 +12,6 @@ def config_flask(app):
     if not env_flask_config_name:
         env_flask_config_name = 'development'
     try:
-        print(env_flask_config_name)
         app.config.from_object(CONFIG_NAME_MAPPER[env_flask_config_name])
     except ImportError:
         raise
