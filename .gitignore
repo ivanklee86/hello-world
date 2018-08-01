@@ -1,3 +1,9 @@
+#Custom
+test.db
+.idea
+assets
+results*
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/

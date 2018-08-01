@@ -5,7 +5,7 @@ from logging import Filter
 from uuid import uuid4
 
 
-# Filter to add request ID to logger
+# Filter to add request ID to logging
 class RequestIdFilter(Filter):
     def filter(self, record):
         if has_app_context():

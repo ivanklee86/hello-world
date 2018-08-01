@@ -21,6 +21,9 @@ class BaseConfig(object):
     DEBUG = False
     TESTING = False
 
+    LOG_LEVEL = "INFO"
+    LOG_FORMATTER = "JSON"
+
 
 class ProductionConfig(BaseConfig):
     pass
@@ -33,4 +36,7 @@ class StagingConfig(BaseConfig):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    LOG_LEVEL = "DEBUG"
+    LOG_FORMATTER = "TEXT"
+
+    SQLALCHEMY_DATABASE_URI = os.getenv('APP_DATABASE_URI')
