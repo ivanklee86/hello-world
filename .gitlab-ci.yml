@@ -2,11 +2,15 @@ image: python:latest
 
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
+  PYTHONPATH: "."
 
 cache:
   paths:
     - .cache/pip
     - venv/
+
+  stages:
+    - test
 
 before_script:
   - python -V
@@ -14,8 +18,14 @@ before_script:
   - virtualenv venv
   - source venv/bin/activate
 
-run:
+test:
+  stage: test
   script:
-  - curl ipinfo.io/ip
-  - curl -v https://zalenium.aoach.tools/wd/hub
-  - python hello_world.py
+      - py.test -n 4 --cov=aoachpages
+      - pylint hello_flask -f parseable>> pylint.log || true
+  artifacts:
+    paths:
+    - results.html
+    - results.xml
+    - pylint.log
+  
