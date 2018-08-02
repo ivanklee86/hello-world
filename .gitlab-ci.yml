@@ -1,27 +1,29 @@
-image: python:latest
-
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
   PYTHONPATH: "."
+  DOCKER_HOST: tcp://localhost:2375/
+  DOCKER_DRIVER: overlay
 
 cache:
   paths:
     - .cache/pip
     - venv/
+services:
+- docker:dind
 
 stages:
   - test
-
-before_script:
-  - python -V
-  - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt
+  - build
 
 test:
   stage: test
+  image: python:latest
   script:
+      - python -V
+      - pip install virtualenv
+      - virtualenv venv
+      - source venv/bin/activate
+      - pip install -r requirements.txt
       - py.test -n 4 --cov=app
       - pylint app -f parseable>> pylint.log || true
   artifacts:
@@ -29,4 +31,16 @@ test:
     - results.html
     - results.xml
     - pylint.log
+
+build:
+  stage: build
+  image: docker:dind
+  cache: {}
+  script:
+    - docker info
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $CI_REGISTRY/hamsterwheel/hello-world:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY/hamsterwheel/hello-world
+  only:
+    - master
   
