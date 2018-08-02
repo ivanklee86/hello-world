@@ -2,7 +2,7 @@ import sys
 
 import logging
 import logmatic
-from hello_flask.helpers.requestid import RequestIdFilter
+from app.helpers.requestid import RequestIdFilter
 
 
 def init_app(app):

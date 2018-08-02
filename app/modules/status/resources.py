@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, make_response
-from hello_flask.helpers.requestid import requestid
+from app.helpers.requestid import requestid
 
 status_blueprint = Blueprint('status', __name__, url_prefix='/api/v1/status')
 

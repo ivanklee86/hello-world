@@ -22,8 +22,8 @@ before_script:
 test:
   stage: test
   script:
-      - py.test -n 4 --cov=hello_flask
-      - pylint hello_flask -f parseable>> pylint.log || true
+      - py.test -n 4 --cov=app
+      - pylint app -f parseable>> pylint.log || true
   artifacts:
     paths:
     - results.html

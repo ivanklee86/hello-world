@@ -2,7 +2,7 @@ import shutil
 import tempfile
 import pytest
 import sqlite3
-from hello_flask import create_app
+from app import create_app
 
 def create_db(file_name):
     # Creates a temporary sqlite database

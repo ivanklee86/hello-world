@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, make_response, current_app, request
-from hello_flask.helpers.requestid import requestid
-from hello_flask.extensions.sqlalchemy import db
+from app.helpers.requestid import requestid
+from app.extensions.sqlalchemy import db
 from .models import Entry
 
 entries_blueprint = Blueprint('entries', __name__, url_prefix='/api/v1/entries')

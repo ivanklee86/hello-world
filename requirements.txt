@@ -3,8 +3,9 @@ Flask
 Flask-SQLAlchemy
 gunicorn
 logmatic-python
-psycopg2
+psycopg2-binary
 SQLAlchemy
+termcolor
 
 #Development
 pytest

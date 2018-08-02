@@ -5,11 +5,11 @@ from flask import Flask, make_response, jsonify
 def create_app(overwrite_db=None):
     app = Flask(__name__)
 
-    from hello_flask import extensions
-    from hello_flask import modules
-    from hello_flask.config_flask import config_flask
-    from hello_flask.helpers.requestid import requestid
-    from hello_flask.extensions.sqlalchemy.create_db import create_db
+    from app import extensions
+    from app import modules
+    from app.config_flask import config_flask
+    from app.helpers.requestid import requestid
+    from app.extensions.sqlalchemy.create_db import create_db
 
     config_flask(app)
     if overwrite_db:
@@ -27,7 +27,3 @@ def create_app(overwrite_db=None):
         return make_response(jsonify(exception), 500)
 
     return app
-
-if __name__ == "__main__":
-    my_app = create_app()
-    my_app.run()
