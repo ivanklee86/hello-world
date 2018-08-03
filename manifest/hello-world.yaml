@@ -1,0 +1,72 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-world
+  namespace: gitlab
+  labels:
+    app: hello-world
+    env: staging
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hello-world
+        env: gitlab
+    spec:
+      containers:
+        - name: hello-world
+          image: "registry.gitlab.com/hamsterwheel/hello-world:0.5.0"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5000
+            initialDelaySeconds: 90
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5000
+            timeoutSeconds: 1
+      imagePullSecrets:
+        - name: registrypullsecret-gl-hw
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+  namespace: gitlab
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+    name: http
+  selector:
+    app: hello-world
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-infrastructure-hw
+  namespace: gitlab
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/whitelist-source-range: "72.79.44.36/32,13.59.49.199/32,18.217.83.204/32,10.0.0.0/8,71.105.157.26/32"
+spec:
+  rules:
+  - host: hello-world.aoach.tools
+    http:
+      paths:
+      - path: /
+        backend:
+            serviceName: hello-world
+            servicePort: 5000

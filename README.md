@@ -1,6 +1,6 @@
 # Flask demo app
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
+[![pipeline status](https://gitlab.com/hamsterwheel/hello-world/badges/master/pipeline.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![coverage report](https://gitlab.com/hamsterwheel/hello-world/badges/master/coverage.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
 
 This is a small demo app created in Flask created to exercise automated deployments
 of non-trivial applications.
@@ -17,10 +17,10 @@ of non-trivial applications.
 The only model defined for the application is the model of an `Entry`.
 
 An `Entry` is composed by the following fields:
-	* id: unique identifier for an entry. This field is generated automatically 
+* id: unique identifier for an entry. This field is generated automatically 
 	and	cannot be modified.
-	* description: a description for the `Entry`. 
-	* comment: a comment over the `Entry`. 
+* description: a description for the `Entry`. 
+* comment: a comment over the `Entry`. 
 
 ## Configuration
 
@@ -29,10 +29,6 @@ The following environment variables can be configured:
 * APP_DATABASE_URI (mandatory): points to the backing database.
 * APP_LOG_LEVEL (optional): allows configuring the application log level. If it is
 not specified, the default log level will be INFO.
-* APP_HOST (optional): specifies which IP the application should bind to. If not
-specified, it will bind to all addresses. T
-* APP_PORT (optional): specified which port the application should bind to. If not
-specified, it will bind to 5000.
 
 ## Deployment
 
