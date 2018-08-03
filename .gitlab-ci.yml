@@ -8,12 +8,17 @@ cache:
   paths:
     - .cache/pip
     - venv/
+
+before_script:
+  - export APP_VERSION=`cat VERSION`
+
 services:
 - docker:dind
 
 stages:
   - test
   - build
+  - deploy
 
 test:
   stage: test
@@ -39,8 +44,21 @@ build:
   script:
     - docker info
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    - docker build -t $CI_REGISTRY/hamsterwheel/hello-world:$CI_COMMIT_SHA .
+    - docker build -t "$CI_REGISTRY/hamsterwheel/hello-world:$APP_VERSION" .
     - docker push $CI_REGISTRY/hamsterwheel/hello-world
   only:
     - master
-  
+
+deploy:
+  stage: deploy
+  image: lwolf/kubectl_deployer:latest
+  cache: {}
+  environment:
+    name: staging
+  script:
+    - mkdir -p $HOME/.kube
+    - cp $KUBECONFIG $HOME/.kube/config
+    - echo $APP_VERSION
+    - kubectl set image deployment hello-world hello-world=registry.gitlab.com/hamsterwheel/hello-world:$APP_VERSION --namespace gitlab --record
+  only:
+    - master
