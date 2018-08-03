@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: hello-world
-          image: "registry.gitlab.com/hamsterwheel/hello-world:0.5.0"
+          image: "registry.gitlab.com/hamsterwheel/hello-world:latest"
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
