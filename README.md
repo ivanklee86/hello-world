@@ -26,9 +26,22 @@ An `Entry` is composed by the following fields:
 
 The following environment variables can be configured:
 
+### General
+* FLASK_CONFIG - Environment for app (development, staging, production)
+* LOG_LEVEL - Log level (DEUG, INFO, etc.)
+* LOG_FORMATTER - TEXT for text logs, JSON for ELK-friendly logs.
+
+### Production / General
+
+Postgres configuration:
+* DB_USER
+* DB_PASS
+* DB_HOST
+* DB_PORT
+* DB_NAME
+
+### Development
 * APP_DATABASE_URI (mandatory): points to the backing database.
-* APP_LOG_LEVEL (optional): allows configuring the application log level. If it is
-not specified, the default log level will be INFO.
 
 ## Deployment
 

@@ -21,16 +21,6 @@ COPY . /app
 RUN pip install -r requirements.txt
 ENV PYTHONPATH /app
 
-# Config app
-# ---------------------------------------------------------------------- #
-ENV FLASK_CONFIG staging
-
-ENV DB_USER cnpnldjb
-ENV DB_PASS Yc4MicwfIrewPagGM5bQOoXQ_UMZahxn
-ENV DB_HOST elmer.db.elephantsql.com
-ENV DB_PORT 5432
-ENV DB_NAME cnpnldjb
-
 # Start flask
 # ---------------------------------------------------------------------- #
 ENTRYPOINT ["python"]

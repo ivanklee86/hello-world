@@ -21,8 +21,8 @@ class BaseConfig(object):
     DEBUG = False
     TESTING = False
 
-    LOG_LEVEL = "INFO"
-    LOG_FORMATTER = "JSON"
+    LOG_LEVEL = os.getenv('LOG_LEVEL')
+    LOG_FORMATTER = os.getenv('LOG_FORMATTER')
 
 
 class ProductionConfig(BaseConfig):
