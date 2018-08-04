@@ -18,7 +18,8 @@ services:
 stages:
   - test
   - build
-  - deploy
+  - deploy-staging
+  - deploy-prod
 
 test:
   stage: test
@@ -49,8 +50,8 @@ build:
   only:
     - master
 
-deploy:
-  stage: deploy
+deploy-staging:
+  stage: deploy-staging
   image: lwolf/kubectl_deployer:latest
   cache: {}
   environment:
@@ -59,6 +60,21 @@ deploy:
     - mkdir -p $HOME/.kube
     - cp $KUBECONFIG $HOME/.kube/config
     - echo $APP_VERSION
-    - kubectl set image deployment hello-world hello-world=registry.gitlab.com/hamsterwheel/hello-world:$APP_VERSION --namespace gitlab --record
+    - kubectl set image deployment hello-world-stg hello-world-stg=registry.gitlab.com/hamsterwheel/hello-world:$APP_VERSION --namespace gitlab --record
   only:
     - master
+
+deploy-prod:
+  stage: deploy-prod
+  image: lwolf/kubectl_deployer:latest
+  cache: {}
+  environment:
+    name: production
+  script:
+    - mkdir -p $HOME/.kube
+    - cp $KUBECONFIG $HOME/.kube/config
+    - echo $APP_VERSION
+    - kubectl set image deployment hello-world-prod hello-world-prod=registry.gitlab.com/hamsterwheel/hello-world:$APP_VERSION --namespace gitlab --record
+  only:
+    - master
+  when: manual
