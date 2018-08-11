@@ -1,6 +1,8 @@
 #App
 Flask
 Flask-SQLAlchemy
+flask-table
+Flask-WTF
 gunicorn
 logmatic-python
 psycopg2-binary

@@ -1,7 +1,7 @@
 import os
 
 
-class BaseConfig(object):
+class BaseConfig():
     # Load config settings from environment variables
     DB_HOST = os.getenv('DB_HOST')
     DB_NAME = os.getenv('DB_NAME')

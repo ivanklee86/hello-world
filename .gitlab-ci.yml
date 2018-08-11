@@ -31,7 +31,7 @@ test:
       - source venv/bin/activate
       - pip install -r requirements.txt
       - py.test -n 4 --cov=app
-      - pylint app -f parseable>> pylint.log || true
+      - pylint app -f parseable>> pylint.log
   artifacts:
     paths:
     - results.html

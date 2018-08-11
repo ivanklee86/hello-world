@@ -1,8 +1,8 @@
-from flask import make_response, request, g, has_app_context, \
-    has_request_context
 from functools import wraps, update_wrapper
 from logging import Filter
 from uuid import uuid4
+from flask import make_response, request, g, has_app_context, \
+    has_request_context
 
 
 # Filter to add request ID to logging
@@ -27,10 +27,10 @@ def requestid(view):
     @wraps(view)
     def request_id(*args, **kwargs):
         response = make_response(view(*args, **kwargs))
-        id = request.headers.get('X-Request-Id') or \
+        header_id = request.headers.get('X-Request-Id') or \
             getattr(g, 'request_id', None)
-        if id:
-            response.headers['X-Request-Id'] = id
+        if header_id:
+            response.headers['X-Request-Id'] = header_id
         return response
 
     return update_wrapper(request_id, view)

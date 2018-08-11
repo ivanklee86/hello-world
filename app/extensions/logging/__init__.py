@@ -6,6 +6,7 @@ from app.helpers.requestid import RequestIdFilter
 
 
 def init_app(app):
+    # pylint: disable=protected-access
     log_level = logging._nameToLevel[app.config['LOG_LEVEL']]
     log_type = app.config['LOG_FORMATTER']
 
@@ -15,6 +16,7 @@ def init_app(app):
     if log_type.upper() == 'JSON':
         handler.setFormatter(logmatic.JsonFormatter())
     else:
+        #pylint: disable=line-too-long
         text_formatter = logging.Formatter('%(asctime)s - %(request_id)s - %(name)s - %(filename)s - %(levelname)s - %(message)s')
         handler.setFormatter(text_formatter)
 
@@ -25,5 +27,5 @@ def init_app(app):
     logger.addHandler(handler)
     logger.setLevel(log_level)
 
-    app.logger.addHandler(handler)
-    app.logger.setLevel(log_level)
+    # app.logger.addHandler(handler)
+    # app.logger.setLevel(log_level)

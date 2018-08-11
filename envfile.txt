@@ -1,0 +1,4 @@
+PYTHONPATH=.
+FLASK_CONFIG=development
+FLASK_ENV=development
+APP_DATABASE_URI=sqlite:///./test.db

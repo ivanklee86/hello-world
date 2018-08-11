@@ -4,8 +4,8 @@ from .sqlalchemy import db
 
 def init_app(app):
     extensions = [
-            logging,
-            db,
+        logging,
+        db,
     ]
 
     for extension in extensions:
