@@ -23,5 +23,4 @@ ENV PYTHONPATH /app
 
 # Start flask
 # ---------------------------------------------------------------------- #
-ENTRYPOINT ["python"]
-CMD ["app"]
+CMD ["gunicorn", "--config", "gunicorn_config.py", "wsgi"]

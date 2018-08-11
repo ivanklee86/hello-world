@@ -1,8 +1,16 @@
-import os
+"""
+Flask app factory
+"""
 from flask import Flask, make_response, jsonify
 
 
 def create_app(overwrite_db=None):
+    """
+    Flask app factory method.
+
+    :param overwrite_db: URI for local SQLITE DB, used for tests.
+    :return:
+    """
     app = Flask(__name__)
 
     from app import extensions
@@ -18,8 +26,11 @@ def create_app(overwrite_db=None):
     extensions.init_app(app)
     modules.init_app(app)
 
-    create_db(app)
+    if overwrite_db:
+        create_db(app)
 
+    # Error handling method
+    # pylint: disable=unused-variable
     @requestid
     @app.errorhandler(500)
     def internal_error(exception):

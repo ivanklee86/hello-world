@@ -1,0 +1,19 @@
+<!doctype html>
+<html class="no-js" lang="en">
+   {% include 'head.html' %}
+   {% include 'header.html' %}
+   <body>
+      <form method=post>
+         <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+               <div class="medium-6 cell">
+                  {{ form.comment_id.label() }}
+                  {{ form.comment_id(type="text", placeholder="Search ID") }}
+                  <input class="button primary" type=submit value=Search>
+               </div>
+            </div>
+         </div>
+      </form>
+      {% include 'javascript.html' %}
+   </body>
+</html>

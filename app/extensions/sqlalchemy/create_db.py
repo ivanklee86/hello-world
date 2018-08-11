@@ -1,4 +1,3 @@
-from app.modules.entries.models import Entry
 from app.extensions.sqlalchemy import db
 
 def create_db(app):
