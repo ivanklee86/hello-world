@@ -1,0 +1,33 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+Flask = "*"
+Flask-SQLAlchemy = "*"
+Flask-Table = "*"
+Flask-WTF = "*"
+gunicorn = "*"
+logmatic-python = "*"
+"psycopg2-binary" = "*"
+SQLAlchemy = "*"
+termcolor = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-html = "*"
+pytest-runner = "*"
+pytest-rerunfailures = "*"
+pytest-xdist = "*"
+pylint = "*"
+
+
+
+[requires]
+
+python_version = "3.7"

@@ -1,3 +1,9 @@
+CHANGES IN VERSION 0.3=4.0 (from 0.3.0)
+===================================
+
+#### General
+* Now with more pipenv!
+
 CHANGES IN VERSION 0.3.0 (from 0.2.1)
 ===================================
 
