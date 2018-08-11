@@ -18,7 +18,8 @@ EXPOSE 5000
 # Install app
 # ---------------------------------------------------------------------- #
 COPY . /app
-RUN pip install -r requirements.txt
+RUN pip install pipenv
+RUN pipenv install --system --deploy
 ENV PYTHONPATH /app
 
 # Start flask

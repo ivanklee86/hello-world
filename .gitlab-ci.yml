@@ -1,6 +1,7 @@
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
   PYTHONPATH: "."
+  WORKON_HOME: venv
   DOCKER_HOST: tcp://localhost:2375/
   DOCKER_DRIVER: overlay
 
@@ -26,12 +27,10 @@ test:
   image: python:latest
   script:
       - python -V
-      - pip install virtualenv
-      - virtualenv venv
-      - source venv/bin/activate
-      - pip install -r requirements.txt
-      - py.test -n 4 --cov=app
-      - pylint app -f parseable>> pylint.log
+      - pip install pipenv
+      - pipenv install --dev
+      - pipenv run py.test -n 4 --cov=app
+      - pipenv run pylint app -f parseable>> pylint.log
   artifacts:
     paths:
     - results.html
