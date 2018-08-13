@@ -1,4 +1,11 @@
-CHANGES IN VERSION 0.3=4.0 (from 0.3.0)
+CHANGES IN VERSION 0.4.2 (from 0.4.0)
+===================================
+
+#### General
+* Fixed logging in staging/prod.
+* Implemented Marshmallow schema on top of SQLAlchemy ORM.
+
+CHANGES IN VERSION 0.4.0 (from 0.3.0)
 ===================================
 
 #### General
