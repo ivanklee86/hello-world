@@ -57,6 +57,4 @@ def test_entries_id_DELETE(client):
                content_type="application/json")
 
     response = client.delete('/api/v1/entries/1')
-
-    json_data = json.loads(response.data)
-    print(json_data)
+    assert response.status_code == 204

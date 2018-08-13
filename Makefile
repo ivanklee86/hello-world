@@ -2,7 +2,7 @@ SHELL := /bin/bash
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 DB_NAME := test.db
 
-
+# Runs Hello World via Flask (for testing only!)
 run:
 	export PYTHONPATH='.'; \
 	export FLASK_CONFIG='development'; \
@@ -10,6 +10,7 @@ run:
 	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
 	flask run; \
 
+# Run Hello World via gunicorn (pre-Docker testing)
 run-gunicorn:
 	export PYTHONPATH='.'; \
 	export FLASK_CONFIG='development'; \
@@ -17,9 +18,11 @@ run-gunicorn:
 	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
 	gunicorn --config gunicorn_config.py wsgi; \
 
+# Run service in Docker.
 run-docker:
 	docker run -it -p 5000:5000 --env-file envfile.txt --name hello-world --rm  hello-world:latest
 
+# Build Docker container
 build:
 	docker build -t hello-world .
 

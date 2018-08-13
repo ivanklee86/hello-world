@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "41f9760538278891e80a757e977e20b935b805ce47f257ca56a3f8225766810c"
+            "sha256": "a6169ab073f19939e0f1e12bd108835fce9c83ba3d998e05cb4703a7fb5d4cef"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -44,6 +44,14 @@
                 "sha256:c0d75710bd4b0fe866f9f2347de6e19208712f9cec006436b4c1c15d4cb0c939"
             ],
             "version": "==0.11.2"
+        },
+        "flask-marshmallow": {
+            "hashes": [
+                "sha256:75c9d80f22af982b1e8ccec109d3b75c14bb5570602ae3705a4ff775badd2816",
+                "sha256:db7aff4130eb99fd05ab78fd2e2c58843ba0f208899aeb1c14aff9cd98ae8c80"
+            ],
+            "index": "pypi",
+            "version": "==0.9.0"
         },
         "flask-sqlalchemy": {
             "hashes": [
@@ -102,6 +110,21 @@
             ],
             "version": "==1.0"
         },
+        "marshmallow": {
+            "hashes": [
+                "sha256:0f3776aa5b5405f6000c9304841abe6d4d708bb08207fc89a5ecd86622ec9e54",
+                "sha256:57a107cfd58e9ed52dd355c65444e983d064fdcf63214a487d7305a2d24680db"
+            ],
+            "version": "==2.15.4"
+        },
+        "marshmallow-sqlalchemy": {
+            "hashes": [
+                "sha256:32ff19350a8892b3e8dc954eeeac796576bb89356512f9e1ccd33da63f856930",
+                "sha256:755b16b64c0273fd8083dbe1e938dff0d49359c76d6238898c9082e3fc55368d"
+            ],
+            "index": "pypi",
+            "version": "==0.14.0"
+        },
         "psycopg2-binary": {
             "hashes": [
                 "sha256:04afb59bbbd2eab3148e6816beddc74348078b8c02a1113ea7f7822f5be4afe3",
@@ -152,6 +175,13 @@
                 "sha256:ffb9ef1de172603304d9d2819af6f5ece76f2e85ec10692a524dd876e72bf277"
             ],
             "version": "==2018.5"
+        },
+        "six": {
+            "hashes": [
+                "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
+                "sha256:832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb"
+            ],
+            "version": "==1.11.0"
         },
         "sqlalchemy": {
             "hashes": [

@@ -1,16 +1,20 @@
 # Flask demo app
 
-[![pipeline status](https://gitlab.com/hamsterwheel/hello-world/badges/master/pipeline.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![coverage report](https://gitlab.com/hamsterwheel/hello-world/badges/master/coverage.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
+[![pipeline status](https://gitlab.com/hamsterwheel/hello-world/badges/master/pipeline.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![coverage report](https://gitlab.com/hamsterwheel/hello-world/badges/master/coverage.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) 
 
-This is a small demo app created in Flask created to exercise automated deployments
+This is a small sandbox Flask app to experiment with deployment best-practices and automated deployments
 of non-trivial applications.
 
-* Configuration based on environment variables
-* Database-backed entries
-* JSON API
-* Stateless
-* Support for X-Request-ID header for request tracking
-* Logging with JSON to stdout
+Features:
+* Sandbox app
+	* Requirement management using `pipenv`
+	* JSON API build with Flask & GUnicorn
+	* SQLAlchemy ORM interfacing with SQLLITE (dev) and PostgreSQL (prod)
+	* Web UI
+* Deployments
+	* Makefile that gets you up & developing fast!
+	* Gitlab CI pipleine (test, build Docker image, CD to staging, manual deployment to production)
+	* Configured via environment variables (env file, Config Map, etc.)
 
 ## Model
 
@@ -21,6 +25,21 @@ An `Entry` is composed by the following fields:
 	and	cannot be modified.
 * description: a description for the `Entry`. 
 * comment: a comment over the `Entry`. 
+
+## Development
+
+### Local development
+1. Use `pipenv install` to create a virtualenv with requirements.
+2. Create a local database with `make database`.
+3. Start Flask server using `make run`.
+
+To run unit tests, add root dir to your PYTHONPATH (`export PYTHONPATH=".:$PYTHONPATH"`) and run tests with `py.test`.
+
+### Local deployment testing
+1. Run Hello World using gunicorn + Flask with `make run-gunicorn`.
+2. Sanity check app!
+3. Build local Docker image using `make build`.
+4. Run Docker image locally using `make run-docker`.
 
 ## Configuration
 
@@ -43,48 +62,9 @@ Postgres configuration:
 ### Development
 * APP_DATABASE_URI (mandatory): points to the backing database.
 
-## Deployment
-
-The requirements for the application are listed in `requirements.txt`.
-
 ## API
 
-The following endpoints are offered:
-
-* /api/v1/entries
-	* parameters: none
-	* methods: GET
-	* description: list all entries in the database
-	* accepts: all formats
-	* returns: application/json
-
-* /api/v1/entries
-	* parameters: JSON object representing an `Entry`
-	* methods: POST
-	* description: create a new entry
-	* accepts: application/json
-	* returns: application/json
-
-* /api/v1/entries/<id>
-	* parameters: JSON object representing an `Entry`
-	* methods: POST
-	* description: update an existing `Entry`
-	* accepts: application/json
-	* returns: application/json
-
-* /api/v1/entries/<id>
-	* parameters: entry id
-	* methods: DELETE
-	* description: remove an entry from the database
-	* accepts: all formats
-	* returns: application/json
-
-* /api/v1/status
-	* parameters: none
-	* methods: GET
-	* description: return "OK" if the application is reachable
-	* accepts: all formats
-	* returns: application/json
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
 
 # License
 
