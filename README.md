@@ -1,6 +1,6 @@
 # Flask demo app
 
-[![pipeline status](https://gitlab.com/hamsterwheel/hello-world/badges/master/pipeline.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![coverage report](https://gitlab.com/hamsterwheel/hello-world/badges/master/coverage.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) 
+[![pipeline status](https://gitlab.com/hamsterwheel/hello-world/badges/master/pipeline.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![coverage report](https://gitlab.com/hamsterwheel/hello-world/badges/master/coverage.svg)](https://gitlab.com/hamsterwheel/hello-world/commits/master) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 This is a small sandbox Flask app to experiment with deployment best-practices and automated deployments
 of non-trivial applications.
@@ -29,8 +29,23 @@ To run unit tests, add root dir to your PYTHONPATH (`export PYTHONPATH=".:$PYTHO
 ### Local deployment testing
 1. Run Hello World using gunicorn + Flask with `make run-gunicorn`.
 2. Sanity check app!
-3. Build local Docker image using `make build`.
-4. Run Docker image locally using `make run-docker`.
+
+## Deployment
+
+You can build the Docker image using `make build` or by running the Docker command directly:
+
+> docker build -t hello-world .
+
+You can run the Docker image using the following Docker command:
+
+> docker run -it -p PORT:5000 --env-file [ENV FILE] --name hello-world --rm  hello-world:latest
+
+Arguments:
+* PORT - Target port.
+* ENV FILE - Text file with environment variables in VAR=VAL form (i.e. standard Docker env file format).  This lets you configure your app!
+
+For example:
+> docker run -it -p 5000:5000 --env-file envfile.txt --name hello-world --rm  hello-world:latest
 
 ## Configuration
 
@@ -55,7 +70,7 @@ Postgres configuration:
 
 ## API
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/1523535/RWTmtHSP)
 
 ## Database
 ### Install
