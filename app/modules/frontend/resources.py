@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from wtforms import Form, IntegerField, validators
 from flask_table import Table, Col
 from app.helpers.requestid import requestid
-from app.modules.entries.models import Entry
+from app.modules.books.models import Book
 
 # pylint: disable=invalid-name
 frontend_blueprint = Blueprint('frontend', __name__, url_prefix='/')
@@ -11,8 +11,11 @@ frontend_blueprint = Blueprint('frontend', __name__, url_prefix='/')
 class Comments(Table):
     classes = ['table']
     id = Col('id')
-    comment = Col('comment', )
+    title = Col('title')
+    author = Col('author')
+    publisher = Col('publisher')
     description = Col('description')
+    comment = Col('comment', )
 
 class SearchForm(Form):
     comment_id = IntegerField("Id", [validators.Optional()])
@@ -27,17 +30,17 @@ def index_page():
 def search_page():
     form = SearchForm(request.form)
     if request.method == 'POST' and form.validate():
-        return comments(form.comment_id.data)
+        return book_results(form.comment_id.data)
     return render_template('search.html', form=form)
 
 @requestid
 @frontend_blueprint.route('/comments', methods=['GET'])
 @frontend_blueprint.route('/comments/<id>', methods=['GET'])
-def comments(comment_id=None):
+def book_results(comment_id=None):
     if not comment_id:
-        entries = Entry.query.all()
+        books = Book.query.all()
     else:
-        entries = Entry.query.filter(Entry.id == comment_id)
+        books = Book.query.filter(Book.id == comment_id)
 
-    table = Comments(entries)
+    table = Comments(books)
     return render_template('search_results.html', table=table)
