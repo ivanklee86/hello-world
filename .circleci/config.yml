@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: python:latest
+    steps:
+      - checkout
+      - run:
+          name: Set up pipenv.
+          command: pip install pipenv
+      - run:
+          name: Install dependencies.
+          command: pipenv install --dev
+      - run:
+          name: Run tests.
+          command: pipenv run py.test -n 4 --cov=app
+      - run:
+          name: Lint code.
+          command: pipenv run pylint app -f parseable>> pylint.log
+      - store_test_results:
+          path: results.xml
+      - store_artifacts:
+          path: pylint.log
+
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    environment:
+      TEST_RESULTS: /tmp/test-results
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Load version information
+          command: export APP_VERSION=`cat VERSION`
+      - run:
+          name: Build and push Docker image
+          command: |
+            cat 
+            docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:$APP_VERSION .
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push cluelesshamster86/hello-world:latest
+    general:
+      branches:
+        only:
+        - master 
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
