@@ -1,11 +1,11 @@
 from . import status
-from . import entries
+from . import books
 from . import frontend
 
 def init_app(app, **kwargs):
     modules = [
         status,
-        entries,
+        books,
         frontend
     ]
 

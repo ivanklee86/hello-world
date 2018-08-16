@@ -13,18 +13,9 @@ Features:
 	* Web UI
 * Deployments
 	* Makefile that gets you up & developing fast!
+	* Database management via flask-migrate & Alembic
 	* Gitlab CI pipleine (test, build Docker image, CD to staging, manual deployment to production)
 	* Configured via environment variables (env file, Config Map, etc.)
-
-## Model
-
-The only model defined for the application is the model of an `Entry`.
-
-An `Entry` is composed by the following fields:
-* id: unique identifier for an entry. This field is generated automatically 
-	and	cannot be modified.
-* description: a description for the `Entry`. 
-* comment: a comment over the `Entry`. 
 
 ## Development
 
@@ -65,6 +56,16 @@ Postgres configuration:
 ## API
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/602ebf2c53d3cea6b560)
+
+## Database
+### Install
+1. To bootstrap a database, set up the appropriate configuration (i.e. via a source file).
+2. Go to the `./app` folder.
+3. Run `python manage.py db upgrade`
+
+### Creating a change set.
+1. Make appropriate changes to your DB models.
+2. Run `python manage.py db migrate`
 
 # License
 

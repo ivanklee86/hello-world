@@ -1,3 +1,11 @@
+CHANGES IN VERSION 1.0.0 (from 0.4.2)
+===================================
+
+#### General
+* Re-formatted app to a "favorite books" theme.
+* Implemented Alembic (via flask-manifest) for database management.
+* Cleanup for public fork.
+
 CHANGES IN VERSION 0.4.2 (from 0.4.0)
 ===================================
 
