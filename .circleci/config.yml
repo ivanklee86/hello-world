@@ -31,13 +31,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Load version information
-          command: export APP_VERSION=`cat VERSION`
-      - run:
           name: Build and push Docker image
           command: |
-            cat 
-            docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:$APP_VERSION .
+            docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:`cat VERSION` .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker push cluelesshamster86/hello-world:latest
     general:
