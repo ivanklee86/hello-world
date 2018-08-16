@@ -31,9 +31,14 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Set APP_VERSION environment variable on run.
+          command: |
+            echo 'export APP_VERSION=$(cat VERSION)' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: Build and push Docker image
           command: |
-            docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:`cat VERSION` .
+            docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:$APP_VERSION .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker push cluelesshamster86/hello-world:latest
     general:
