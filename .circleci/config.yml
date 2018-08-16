@@ -37,7 +37,8 @@ jobs:
             source $BASH_ENV
             docker build -t cluelesshamster86/hello-world:latest -t cluelesshamster86/hello-world:$APP_VERSION .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker push cluelesshamster86/hello-world:latest cluelesshamster86/hello-world:$APP_VERSION
+            docker push cluelesshamster86/hello-world:latest
+            docker push cluelesshamster86/hello-world:$APP_VERSION
     general:
       branches:
         only:
