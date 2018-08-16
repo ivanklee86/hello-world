@@ -26,6 +26,7 @@ ignore=.git,
       pytest.ini,
       coverage.xml,
       debug_application.py
+      migrations
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
