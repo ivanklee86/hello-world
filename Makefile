@@ -2,9 +2,23 @@ SHELL := /bin/bash
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 DB_NAME := test.db
 
-# Runs Hello World via Flask (for testing only!)
+#-----------------------------------------------------------------------
+# Rules of Rules : Grouped rules that _doathing_
+#-----------------------------------------------------------------------
+
+# Cleans up local DB and orphaned Docker resources
+clean: delete-db clean-docker
+
+# Creates a local DB with bootstraped database objects
+database: delete-db create-db apply-db-ddl
+
+#-----------------------------------------------------------------------
+# Run Rules
+#-----------------------------------------------------------------------
+
+# Cleans up local DB and orphaned Docker resources
 run:
-	export PYTHONPATH='.'; \
+	export PYTHONPATH='${ROOT_DIR}'; \
 	export FLASK_CONFIG='development'; \
 	export FLASK_ENV='development'; \
 	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
@@ -12,7 +26,7 @@ run:
 
 # Run Hello World via gunicorn (pre-Docker testing)
 run-gunicorn:
-	export PYTHONPATH='.'; \
+	export PYTHONPATH='${ROOT_DIR}'; \
 	export FLASK_CONFIG='development'; \
 	export FLASK_ENV='development'; \
 	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
@@ -22,17 +36,36 @@ run-gunicorn:
 run-docker:
 	docker run -it -p 5000:5000 --env-file envfile.txt --name hello-world --rm  hello-world:latest
 
+#-----------------------------------------------------------------------
+# Docker Rules
+#-----------------------------------------------------------------------
+
 # Build Docker container
 build:
 	docker build -t hello-world .
 
-database: delete-db create-db
+# Deletes stopped containers, unused volumes, and unused networks.
+clean-docker:
+	docker system prune -a
 
-clean: delete-db
+#-----------------------------------------------------------------------
+# Database Rules
+#-----------------------------------------------------------------------
 
+# Creates an empty sqlite db
 create-db:
 	# Create empty Sqlite database
-	sqlite3 ${DB_NAME} "create table aTable(field1 int); drop table aTable;"
+	sqlite3 ${DB_NAME} "create table aTable(field1 int); drop table aTable;" \
 
+# Runs Alembic database migration on local development database.
+apply-db-ddl:
+	export PYTHONPATH='${ROOT_DIR}'; \
+	export FLASK_CONFIG='development'; \
+	export FLASK_ENV='development'; \
+	export APP_DATABASE_URI=sqlite:///${ROOT_DIR}/${DB_NAME}; \
+	cd app; \
+	python manage.py db upgrade
+
+# Cleans database
 delete-db:
 	rm -rf ${DB_NAME}

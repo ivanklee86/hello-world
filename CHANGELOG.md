@@ -1,3 +1,10 @@
+CHANGES IN VERSION 1.0.1 (from 1.0.0)
+===================================
+
+#### General
+* Reorganized Makefile.
+* Added Alembic migration to local db creation.
+
 CHANGES IN VERSION 1.0.0 (from 0.4.2)
 ===================================
 

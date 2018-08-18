@@ -21,7 +21,7 @@ Features:
 
 ### Local development
 1. Use `pipenv install` to create a virtualenv with requirements.
-2. Create a local database with `make database`.
+2. Create a local database with `make database`.  This will create the local database and run DB migration scripts.
 3. Start Flask server using `make run`.
 
 To run unit tests, add root dir to your PYTHONPATH (`export PYTHONPATH=".:$PYTHONPATH"`) and run tests with `py.test`.
