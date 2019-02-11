@@ -1,3 +1,9 @@
+CHANGES IN VERSION 1.0.2 (from 1.0.0)
+===================================
+
+#### General
+* Added gevent as worker class.
+
 CHANGES IN VERSION 1.0.1 (from 1.0.0)
 ===================================
 

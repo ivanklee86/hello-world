@@ -12,11 +12,27 @@ clean: delete-db clean-docker
 # Creates a local DB with bootstraped database objects
 database: delete-db create-db apply-db-ddl
 
+# Run tests & linters
+test: lint pytest
+
+#-----------------------------------------------------------------------
+# Testing & linting
+#-----------------------------------------------------------------------
+
+lint:
+	export PYTHONPATH='${ROOT_DIR}' && \
+	pylint app && \
+	mypy app;
+
+pytest:
+	export PYTHONPATH='${ROOT_DIR}'; \
+	py.test tests;
+
 #-----------------------------------------------------------------------
 # Run Rules
 #-----------------------------------------------------------------------
 
-# Cleans up local DB and orphaned Docker resources
+# Runs Hello World
 run:
 	export PYTHONPATH='${ROOT_DIR}'; \
 	export FLASK_CONFIG='development'; \
