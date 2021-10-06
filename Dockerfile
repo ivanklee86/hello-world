@@ -5,7 +5,7 @@
 
 # Base image
 # ---------------------------------------------------------------------- #
-FROM python:3.7.0-stretch
+FROM python:3.9.2-stretch
 LABEL MAINTAINER="Ivan Lee"
 
 RUN apt-get -y update && \
@@ -23,8 +23,7 @@ EXPOSE 5000
 # Install app
 # ---------------------------------------------------------------------- #
 COPY . /app
-RUN pip install pipenv
-RUN pipenv install --system --deploy
+RUN pip install -r requirements.txt
 ENV PYTHONPATH /app
 
 # Start flask
