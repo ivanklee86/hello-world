@@ -5,7 +5,7 @@
 
 # Base image
 # ---------------------------------------------------------------------- #
-FROM python:3.9.2-stretch
+FROM python:3.9
 LABEL MAINTAINER="Ivan Lee"
 
 RUN apt-get -y update && \
