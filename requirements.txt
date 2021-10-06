@@ -8,6 +8,10 @@ logmatic-python
 psycopg2-binary
 SQLAlchemy
 termcolor
+flask-marshmallow
+marshmallow-sqlalchemy
+flask-migrate
+flask-script
 
 #Development
 pytest
@@ -17,3 +21,10 @@ pytest-runner
 pytest-rerunfailures
 pytest-xdist
 pylint
+factory-boy
+coveralls
+mypy
+pylint
+bumpversion
+twine
+mkdocs

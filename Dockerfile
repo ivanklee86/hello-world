@@ -8,9 +8,14 @@
 FROM python:3.7.0-stretch
 LABEL MAINTAINER="Ivan Lee"
 
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get install -y sqlite3 libsqlite3-dev
+
 # Container settings
 # ---------------------------------------------------------------------- #
 WORKDIR /app
+
 ENV LC_ALL C.UTF-8
 ENV LANG =C.UTF-8
 EXPOSE 5000
